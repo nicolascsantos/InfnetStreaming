@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="../src/InfnetStreaming/InfnetStreaming.Data/InfnetStreaming.Data.csproj" />
+    <Project Path="src/InfnetStreaming.Domain/InfnetStreaming.Domain.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
