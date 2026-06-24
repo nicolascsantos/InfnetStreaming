@@ -11,6 +11,8 @@ namespace InfnetStreaming.Data
             modelBuilder.ApplyConfiguration(new IntegranteConfiguration());
             modelBuilder.ApplyConfiguration(new MusicaConfiguration());
             modelBuilder.ApplyConfiguration(new GeneroConfiguration());
+            modelBuilder.ApplyConfiguration(new PlaylistConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         }
 
         public InfnetStreamingDbContext(DbContextOptions options) : base(options)

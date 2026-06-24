@@ -27,8 +27,12 @@ namespace InfnetStreaming.Data.Configurations
                 .HasForeignKey("BandaId");
 
             builder.HasMany(b => b.Singles)
-                .WithOne()
-                .HasForeignKey("BandaId");
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "MusicaBanda",
+                    j => j.HasOne<Musica>().WithMany().HasForeignKey("MusicaId"),
+                    j => j.HasOne<Banda>().WithMany().HasForeignKey("BandaId")
+                );
 
             builder.Navigation(x => x.Albuns).HasField("_albuns");
             builder.Navigation(x => x.Generos).HasField("_generos");

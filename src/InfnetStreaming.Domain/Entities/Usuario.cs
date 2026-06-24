@@ -19,12 +19,12 @@ namespace InfnetStreaming.Domain.Entities
 
         public DateTime DataCriada { get; private set; }
 
-        public Usuario(string nome, string username, string senha, DateTime dataCriada)
+        public Usuario(string nome, string username, string senha)
         {
             Nome = nome;
             Username = username;
             Senha = senha;
-            DataCriada = dataCriada;
+            DataCriada = DateTime.Now;
         }
 
         public void AdicionarPlaylist(Playlist playlist) => _playlists.Add(playlist);

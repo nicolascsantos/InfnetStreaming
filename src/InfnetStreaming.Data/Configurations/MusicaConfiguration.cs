@@ -14,14 +14,6 @@ namespace InfnetStreaming.Data.Configurations
             builder.Property(x => x.OrdemMusica).IsRequired();
             builder.Property(x => x.DataCriacao).IsRequired();
 
-            builder.HasMany<Banda>()
-                .WithMany()
-                .UsingEntity<Dictionary<string, object>>(
-                    "MusicaBanda",
-                    j => j.HasOne<Banda>().WithMany().HasForeignKey("BandaId"),
-                    j => j.HasOne<Musica>().WithMany().HasForeignKey("MusicaId")
-                );
-
             builder.Ignore(x => x.BandaIds);
         }
     }
