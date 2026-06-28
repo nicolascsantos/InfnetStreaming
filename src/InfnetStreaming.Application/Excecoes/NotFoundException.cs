@@ -1,10 +1,7 @@
 ﻿namespace InfnetStreaming.Application.Excecoes
 {
-    public class NotFoundException : Exception
+    public class NotFoundException : Domain.Excecoes.NotFoundException
     {
-        public NotFoundException(string? message) : base(message)
-        {
-            
-        }
+        public NotFoundException(string? message) : base(message) { }
     }
 }
