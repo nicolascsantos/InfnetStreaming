@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/InfnetStreaming.API/InfnetStreaming.API.csproj" Id="304f7ad6-961b-47a7-9de0-cebe588ccd90" />
+    <Project Path="src/InfnetStreaming.Application/InfnetStreaming.Application.csproj" Id="120c3bc7-71ce-46c4-870a-ffa67cd90d27" />
     <Project Path="src/InfnetStreaming.Data/InfnetStreaming.Data.csproj" />
     <Project Path="src/InfnetStreaming.Domain/InfnetStreaming.Domain.csproj" />
   </Folder>
