@@ -13,19 +13,24 @@ namespace InfnetStreaming.Domain.Entities
 
         public string Senha { get; private set; }
 
+        public Guid PlanoId { get; private set; }
+
         public IReadOnlyCollection<Playlist> Playlists => _playlists;
 
         public IReadOnlyCollection<MusicaFavorita> MusicasFavoritas => _musicasFavoritas;
 
         public DateTime DataCriada { get; private set; }
 
-        public Usuario(string nome, string username, string senha)
+        public Usuario(string nome, string username, string senha, Guid planoId)
         {
             Nome = nome;
             Username = username;
             Senha = senha;
+            PlanoId = planoId;
             DataCriada = DateTime.Now;
         }
+
+        public void AlterarPlano(Guid novoPlanoId) => PlanoId = novoPlanoId;
 
         public void AdicionarPlaylist(Playlist playlist) => _playlists.Add(playlist);
 

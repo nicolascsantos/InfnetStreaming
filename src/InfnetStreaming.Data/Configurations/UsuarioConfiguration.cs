@@ -34,6 +34,12 @@ namespace InfnetStreaming.Data.Configurations
                 .HasForeignKey("UsuarioId");
 
             builder.Navigation(u => u.MusicasFavoritas).HasField("_musicasFavoritas");
+
+            builder.Property(u => u.PlanoId).IsRequired();
+
+            builder.HasOne<Plano>()
+                .WithMany()
+                .HasForeignKey(u => u.PlanoId);
         }
     }
 }

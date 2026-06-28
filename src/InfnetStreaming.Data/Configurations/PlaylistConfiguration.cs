@@ -13,7 +13,6 @@ namespace InfnetStreaming.Data.Configurations
                 .IsRequired();
             builder.Property(x => x.DataCriacao)
                 .IsRequired();
-            builder.HasMa
         }
     }
 }
