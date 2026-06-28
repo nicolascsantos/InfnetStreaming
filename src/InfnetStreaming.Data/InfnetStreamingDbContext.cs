@@ -15,6 +15,7 @@ namespace InfnetStreaming.Data
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new PlanoConfiguration());
             modelBuilder.ApplyConfiguration(new TransacaoConfiguration());
+            modelBuilder.ApplyConfiguration(new BandaFavoritaConfiguration());
         }
 
         public InfnetStreamingDbContext(DbContextOptions options) : base(options)

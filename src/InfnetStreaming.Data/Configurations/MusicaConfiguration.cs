@@ -10,6 +10,7 @@ namespace InfnetStreaming.Data.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Nome).IsRequired();
+            builder.HasIndex(x => x.Nome);
             builder.Property(x => x.Duracao).IsRequired();
             builder.Property(x => x.OrdemMusica).IsRequired();
             builder.Property(x => x.DataCriacao).IsRequired();

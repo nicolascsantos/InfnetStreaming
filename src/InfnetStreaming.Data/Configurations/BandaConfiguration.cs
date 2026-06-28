@@ -13,6 +13,7 @@ namespace InfnetStreaming.Data.Configurations
                 .IsRequired();
             builder.Property(x => x.DataFormacao)
                 .IsRequired();
+            builder.HasIndex(x => x.Nome);
 
             builder.HasMany(b => b.Albuns)
                 .WithOne()
