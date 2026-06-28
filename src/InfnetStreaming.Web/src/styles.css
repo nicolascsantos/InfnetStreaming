@@ -1,1 +1,86 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #121212;
+  --surface: #1a1a1a;
+  --card: #242424;
+  --card-hover: #2e2e2e;
+  --accent: #1db954;
+  --accent-hover: #1ed760;
+  --text: #ffffff;
+  --text-muted: #aaaaaa;
+  --border: #333333;
+  --danger: #e53e3e;
+  --danger-hover: #c53030;
+  --radius: 8px;
+  --transition: 0.2s ease;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background var(--transition), opacity var(--transition);
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary { background: var(--accent); color: #000; }
+.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: var(--danger-hover); }
+.btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+.btn-ghost:hover:not(:disabled) { background: var(--card); color: var(--text); }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+input, select {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+  padding: 10px 14px;
+  width: 100%;
+  transition: border-color var(--transition);
+  outline: none;
+}
+input:focus, select:focus { border-color: var(--accent); }
+input::placeholder { color: var(--text-muted); }
+select option { background: var(--card); }
+
+label { display: block; margin-bottom: 6px; color: var(--text-muted); font-size: 13px; }
+.form-group { margin-bottom: 16px; }
+
+.alert { padding: 12px 16px; border-radius: var(--radius); margin-bottom: 16px; font-size: 13px; }
+.alert-error { background: rgba(229,62,62,.15); border: 1px solid var(--danger); color: #fc8181; }
+.alert-success { background: rgba(29,185,84,.15); border: 1px solid var(--accent); color: var(--accent); }
+
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.badge-accent { background: var(--accent); color: #000; }
+.badge-muted { background: var(--card); color: var(--text-muted); border: 1px solid var(--border); }
+
+.spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 40px auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }

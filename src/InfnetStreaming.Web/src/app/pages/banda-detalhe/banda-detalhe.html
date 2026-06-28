@@ -1,0 +1,68 @@
+<app-navbar />
+
+<div class="page">
+  @if (loading()) {
+    <div class="loading">Carregando...</div>
+  } @else if (erro()) {
+    <div class="alert alert-error">{{ erro() }}</div>
+  } @else if (banda(); as b) {
+    <div class="banda-header">
+      <div class="banda-info">
+        <h1>{{ b.nome }}</h1>
+        <div class="meta">
+          <span>Formada em {{ formatarAno(b.data_formacao) }}</span>
+          @if (b.generos.length) {
+            <span class="sep">·</span>
+            <span>{{ b.generos.join(', ') }}</span>
+          }
+        </div>
+        @if (b.integrantes.length) {
+          <div class="integrantes">
+            <span class="label">Integrantes:</span>
+            {{ b.integrantes.map(i => i.nome).join(', ') }}
+          </div>
+        }
+      </div>
+      <button class="btn-fav" [class.ativo]="favoritado()" [disabled]="favoritando()" (click)="favoritar()">
+        {{ favoritado() ? '♥ Favoritada' : '♡ Favoritar' }}
+      </button>
+    </div>
+
+    @if (b.albuns.length) {
+      <section class="section">
+        <h2>Álbuns</h2>
+        @for (album of b.albuns; track album.id) {
+          <div class="album-card">
+            <div class="album-header">
+              <h3>{{ album.nome }}</h3>
+              <span class="album-ano">{{ formatarAno(album.data_lancamento) }}</span>
+            </div>
+            <table class="track-list">
+              @for (musica of album.musicas; track musica.id) {
+                <tr>
+                  <td class="track-num">{{ musica.ordem_musica }}</td>
+                  <td class="track-nome">{{ musica.nome }}</td>
+                  <td class="track-dur">{{ formatarDuracao(musica.duracao) }}</td>
+                </tr>
+              }
+            </table>
+          </div>
+        }
+      </section>
+    }
+
+    @if (b.singles.length) {
+      <section class="section">
+        <h2>Singles</h2>
+        <table class="track-list">
+          @for (s of b.singles; track s.id) {
+            <tr>
+              <td class="track-nome">{{ s.nome }}</td>
+              <td class="track-dur">{{ formatarDuracao(s.duracao) }}</td>
+            </tr>
+          }
+        </table>
+      </section>
+    }
+  }
+</div>

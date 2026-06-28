@@ -164,16 +164,11 @@ namespace InfnetStreaming.Data.Migrations
                     b.Property<int>("OrdemMusica")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("PlaylistId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
 
                     b.HasIndex("Nome");
-
-                    b.HasIndex("PlaylistId");
 
                     b.ToTable("Musica");
                 });
@@ -316,6 +311,21 @@ namespace InfnetStreaming.Data.Migrations
                     b.ToTable("MusicaBanda");
                 });
 
+            modelBuilder.Entity("PlaylistMusica", b =>
+                {
+                    b.Property<Guid>("MusicaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlaylistId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MusicaId", "PlaylistId");
+
+                    b.HasIndex("PlaylistId");
+
+                    b.ToTable("PlaylistMusica");
+                });
+
             modelBuilder.Entity("InfnetStreaming.Domain.Entities.Album", b =>
                 {
                     b.HasOne("InfnetStreaming.Domain.Entities.Banda", null)
@@ -349,10 +359,6 @@ namespace InfnetStreaming.Data.Migrations
                     b.HasOne("InfnetStreaming.Domain.Entities.Album", null)
                         .WithMany("Musicas")
                         .HasForeignKey("AlbumId");
-
-                    b.HasOne("InfnetStreaming.Domain.Entities.Playlist", null)
-                        .WithMany("Musicas")
-                        .HasForeignKey("PlaylistId");
                 });
 
             modelBuilder.Entity("InfnetStreaming.Domain.Entities.MusicaFavorita", b =>
@@ -393,6 +399,21 @@ namespace InfnetStreaming.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PlaylistMusica", b =>
+                {
+                    b.HasOne("InfnetStreaming.Domain.Entities.Musica", null)
+                        .WithMany()
+                        .HasForeignKey("MusicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InfnetStreaming.Domain.Entities.Playlist", null)
+                        .WithMany()
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("InfnetStreaming.Domain.Entities.Album", b =>
                 {
                     b.Navigation("Musicas");
@@ -405,11 +426,6 @@ namespace InfnetStreaming.Data.Migrations
                     b.Navigation("Generos");
 
                     b.Navigation("Integrantes");
-                });
-
-            modelBuilder.Entity("InfnetStreaming.Domain.Entities.Playlist", b =>
-                {
-                    b.Navigation("Musicas");
                 });
 
             modelBuilder.Entity("InfnetStreaming.Domain.Entities.Usuario", b =>

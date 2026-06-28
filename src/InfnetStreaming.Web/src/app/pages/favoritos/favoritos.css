@@ -1,0 +1,17 @@
+.page { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+h1 { font-size: 24px; font-weight: 700; margin-bottom: 28px; }
+
+.section { margin-bottom: 40px; }
+.section h2 { font-size: 16px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .05em; }
+
+.list { display: flex; flex-direction: column; gap: 8px; }
+
+.item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 16px;
+}
+.item-icon { font-size: 20px; flex-shrink: 0; }
+.item-info { flex: 1; }
+.item-nome { font-weight: 600; }
+.item-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }

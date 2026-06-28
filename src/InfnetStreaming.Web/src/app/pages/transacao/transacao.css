@@ -1,0 +1,29 @@
+.page { max-width: 600px; margin: 0 auto; padding: 32px 24px; }
+h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.subtitle { color: var(--text-muted); margin-bottom: 28px; }
+
+.card-form {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px;
+}
+
+.full-width { width: 100%; }
+
+.hint { font-size: 12px; color: var(--text-muted); margin-top: 6px; display: block; }
+
+.resultado {
+  margin-top: 24px;
+  border-radius: 12px;
+  padding: 24px;
+  border: 2px solid;
+}
+.resultado.aprovada { border-color: var(--accent); background: rgba(29,185,84,.08); }
+.resultado.recusada { border-color: var(--danger); background: rgba(229,62,62,.08); }
+
+.resultado-status { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.aprovada .resultado-status { color: var(--accent); }
+.recusada .resultado-status { color: var(--danger); }
+
+.resultado-msg { font-size: 15px; margin-bottom: 12px; }
+.resultado-detalhe { font-size: 13px; color: var(--text-muted); }
+.resultado-id { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-family: monospace; }

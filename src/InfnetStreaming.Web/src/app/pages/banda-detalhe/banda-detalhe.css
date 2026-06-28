@@ -1,0 +1,52 @@
+.page { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
+.loading { color: var(--text-muted); text-align: center; padding: 3rem; }
+
+.banda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.banda-info h1 { margin: 0 0 .4rem; font-size: 2rem; }
+.meta { color: var(--text-muted); font-size: .9rem; margin-bottom: .5rem; }
+.sep { margin: 0 .4rem; }
+.integrantes { font-size: .9rem; color: var(--text-muted); margin-top: .25rem; }
+.integrantes .label { color: var(--text); font-weight: 600; margin-right: .4rem; }
+
+.btn-fav {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  padding: .55rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: .9rem;
+  white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.btn-fav:hover:not(:disabled) { background: var(--accent); color: #000; }
+.btn-fav.ativo { background: var(--accent); color: #000; }
+.btn-fav:disabled { opacity: .5; cursor: default; }
+
+.section { margin-bottom: 2.5rem; }
+.section h2 { font-size: 1.2rem; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: .5rem; }
+
+.album-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.album-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .8rem; }
+.album-header h3 { margin: 0; font-size: 1.05rem; }
+.album-ano { color: var(--text-muted); font-size: .85rem; }
+
+.track-list { width: 100%; border-collapse: collapse; }
+.track-list tr { border-bottom: 1px solid var(--border); }
+.track-list tr:last-child { border-bottom: none; }
+.track-list td { padding: .5rem .3rem; font-size: .9rem; }
+.track-num { color: var(--text-muted); width: 2rem; text-align: right; padding-right: .8rem; }
+.track-nome { color: var(--text); }
+.track-dur { color: var(--text-muted); text-align: right; width: 4rem; }

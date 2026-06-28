@@ -1,0 +1,32 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="logo">🎵 InfnetStreaming</div>
+    <h1>Entrar</h1>
+
+    @if (erro()) {
+      <div class="alert alert-error">{{ erro() }}</div>
+    }
+
+    <div class="form-group">
+      <label>Usuário</label>
+      <input type="text" [ngModel]="username()" (ngModelChange)="username.set($event)" placeholder="username" />
+    </div>
+
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" [ngModel]="senha()" (ngModelChange)="senha.set($event)" placeholder="••••••••" />
+    </div>
+
+    <button class="btn-primary full-width" (click)="entrar()" [disabled]="loading()">
+      {{ loading() ? 'Entrando...' : 'Entrar' }}
+    </button>
+
+    <div class="mock-hint">
+      Credenciais padrão: <strong>admin / Admin123!</strong>
+    </div>
+
+    <p class="link-criar">
+      Não tem conta? <a routerLink="/criar-conta">Criar conta</a>
+    </p>
+  </div>
+</div>

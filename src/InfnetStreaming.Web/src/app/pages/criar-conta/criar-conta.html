@@ -1,0 +1,45 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="logo">🎵 InfnetStreaming</div>
+    <h1>Criar Conta</h1>
+
+    @if (erro()) {
+      <div class="alert alert-error">{{ erro() }}</div>
+    }
+    @if (sucesso()) {
+      <div class="alert alert-success">Conta criada! <a routerLink="/login">Fazer login</a></div>
+    }
+
+    <div class="form-group">
+      <label>Nome</label>
+      <input type="text" [ngModel]="nome()" (ngModelChange)="nome.set($event)" placeholder="Seu nome" />
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" [ngModel]="username()" (ngModelChange)="username.set($event)" placeholder="usuario123" />
+    </div>
+
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" [ngModel]="senha()" (ngModelChange)="senha.set($event)" placeholder="Mínimo 6 caracteres" />
+    </div>
+
+    <div class="form-group">
+      <label>Plano</label>
+      <select [ngModel]="planoId()" (ngModelChange)="planoId.set($event)">
+        @for (p of planos(); track p.id) {
+          <option [value]="p.id">{{ p.nome }} — R$ {{ p.valor | number:'1.2-2' }}/mês</option>
+        }
+      </select>
+    </div>
+
+    <button class="btn-primary full-width" (click)="criar()" [disabled]="loading()">
+      {{ loading() ? 'Criando...' : 'Criar Conta' }}
+    </button>
+
+    <p class="link-criar">
+      Já tem conta? <a routerLink="/login">Entrar</a>
+    </p>
+  </div>
+</div>

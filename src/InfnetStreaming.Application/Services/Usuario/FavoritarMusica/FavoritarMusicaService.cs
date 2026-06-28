@@ -15,16 +15,13 @@ namespace InfnetStreaming.Application.Services.Usuario.FavoritarMusica
 
         public async Task Executar(FavoritarMusicaInput input, CancellationToken cancellationToken)
         {
-            var usuario = await _repositorioUsuario.GetComFavoritos(input.UsuarioId, cancellationToken);
-
+            await _repositorioUsuario.Get(input.UsuarioId, cancellationToken);
             await _repositorioMusica.Get(input.MusicaId, cancellationToken);
 
             if (input.Favoritar)
-                usuario.FavoritarMusica(input.MusicaId);
+                await _repositorioUsuario.AdicionarMusicaFavorita(input.UsuarioId, input.MusicaId, cancellationToken);
             else
-                usuario.DesfavoritarMusica(input.MusicaId);
-
-            await _repositorioUsuario.Atualizar(usuario, cancellationToken);
+                await _repositorioUsuario.RemoverMusicaFavorita(input.UsuarioId, input.MusicaId, cancellationToken);
         }
     }
 }

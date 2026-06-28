@@ -1,0 +1,82 @@
+<app-navbar />
+
+<main class="page">
+  <div class="page-header">
+    <h1>Busca</h1>
+    <div class="search-bar">
+      <input
+        type="text"
+        [ngModel]="termo()"
+        (ngModelChange)="termo.set($event)"
+        (keyup.enter)="buscar()"
+        placeholder="Buscar bandas ou músicas..."
+      />
+      <button class="btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button [class.active]="aba() === 'bandas'" (click)="trocarAba('bandas')">Bandas</button>
+    <button [class.active]="aba() === 'musicas'" (click)="trocarAba('musicas')">Músicas</button>
+  </div>
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    @if (aba() === 'bandas') {
+      @if (bandas().length === 0) {
+        <div class="empty-state">Nenhuma banda encontrada.</div>
+      } @else {
+        <div class="results-grid">
+          @for (b of bandas(); track b.id) {
+            <div class="card">
+              <div class="card-icon">🎸</div>
+              <a class="card-info card-link" [routerLink]="['/bandas', b.id]">
+                <div class="card-nome">{{ b.nome }}</div>
+                <div class="card-meta">Formada em {{ b.data_formacao | date:'yyyy' }}</div>
+              </a>
+              <button
+                class="btn-fav"
+                [class.favoritado]="isFavorito(b.id)"
+                [disabled]="favoritandoId() === b.id"
+                (click)="favoritar(b.id, 'banda')"
+              >{{ isFavorito(b.id) ? '♥' : '♡' }}</button>
+            </div>
+          }
+        </div>
+      }
+    }
+
+    @if (aba() === 'musicas') {
+      @if (musicas().length === 0) {
+        <div class="empty-state">Nenhuma música encontrada.</div>
+      } @else {
+        <div class="results-grid">
+          @for (m of musicas(); track m.id) {
+            <div class="card">
+              <div class="card-icon">🎵</div>
+              <div class="card-info">
+                <div class="card-nome">{{ m.nome }}</div>
+                <div class="card-meta">{{ formatarDuracao(m.duracao) }}</div>
+              </div>
+              <button
+                class="btn-fav"
+                [class.favoritado]="isFavorito(m.id)"
+                [disabled]="favoritandoId() === m.id"
+                (click)="favoritar(m.id, 'musica')"
+              >{{ isFavorito(m.id) ? '♥' : '♡' }}</button>
+            </div>
+          }
+        </div>
+      }
+    }
+
+    @if (totalPaginas > 1) {
+      <div class="paginacao">
+        <button class="btn-ghost btn-sm" [disabled]="pagina() === 1" (click)="irPara(pagina() - 1)">← Anterior</button>
+        <span class="pagina-info">{{ pagina() }} / {{ totalPaginas }}</span>
+        <button class="btn-ghost btn-sm" [disabled]="pagina() === totalPaginas" (click)="irPara(pagina() + 1)">Próxima →</button>
+      </div>
+    }
+  }
+</main>

@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <a routerLink="/busca" class="logo">🎵 InfnetStreaming</a>
+
+  <div class="nav-links">
+    <a routerLink="/busca" routerLinkActive="active">Busca</a>
+    <a routerLink="/playlists" routerLinkActive="active">Playlists</a>
+    <a routerLink="/favoritos" routerLinkActive="active">Favoritos</a>
+    <a routerLink="/assinatura" routerLinkActive="active">Assinatura</a>
+    <a routerLink="/transacao" routerLinkActive="active">Transação</a>
+    <a routerLink="/criar-conta" routerLinkActive="active">Criar Conta</a>
+  </div>
+
+  <div class="user-area">
+    <span class="username">{{ auth.currentUser()?.username }}</span>
+    <button class="btn-ghost btn-sm" (click)="auth.logout()">Sair</button>
+  </div>
+</nav>

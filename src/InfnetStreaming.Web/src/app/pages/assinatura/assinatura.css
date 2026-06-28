@@ -1,0 +1,36 @@
+.page { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+h1 { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+
+.plano-atual {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 24px;
+  color: var(--text-muted);
+}
+.plano-atual strong { color: var(--text); }
+
+.planos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+
+.plano-card {
+  background: var(--card); border: 2px solid var(--border);
+  border-radius: 12px; padding: 28px 24px;
+  position: relative; transition: border-color var(--transition);
+}
+.plano-card.atual { border-color: var(--accent); }
+.plano-card:hover { border-color: var(--accent); }
+
+.atual-badge {
+  position: absolute; top: -1px; right: 16px;
+  background: var(--accent); color: #000;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 10px; border-radius: 0 0 6px 6px;
+}
+
+.plano-nome { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+
+.plano-valor { display: flex; align-items: baseline; gap: 4px; margin-bottom: 24px; }
+.valor-moeda { font-size: 14px; color: var(--text-muted); }
+.valor-num { font-size: 36px; font-weight: 800; }
+.valor-periodo { font-size: 14px; color: var(--text-muted); }
+
+.full-width { width: 100%; }

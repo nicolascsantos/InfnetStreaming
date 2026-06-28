@@ -8,7 +8,8 @@ builder.Services
     .AdicionarEConfigurarControllers()
     .AdicionarConexoesApp(builder.Configuration)
     .AdicionarServicos()
-    .AdicionarAutenticacao(builder.Configuration);
+    .AdicionarAutenticacao(builder.Configuration)
+    .AdicionarCors();
 
 var app = builder.Build();
 
@@ -28,6 +29,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UsarDocumentacao();
 
+app.UseCors(ConfiguracaoCors.PolicyName);
 app.UseAuthentication();
 app.UseAuthorization();
 

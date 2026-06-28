@@ -1,5 +1,6 @@
 using InfnetStreaming.Application.Services.Usuario.FavoritarBanda;
 using InfnetStreaming.Application.Services.Usuario.FavoritarMusica;
+using InfnetStreaming.Application.Services.Usuario.ObterFavoritos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,16 @@ namespace InfnetStreaming.API.Controllers
     [Authorize]
     public class FavoritosController : ControllerBase
     {
+        [HttpGet]
+        public async Task<IActionResult> ObterFavoritos(
+            Guid usuarioId,
+            [FromServices] ObterFavoritosService service,
+            CancellationToken cancellationToken)
+        {
+            var output = await service.Executar(usuarioId, cancellationToken);
+            return Ok(output);
+        }
+
         [HttpPost("musicas/{musicaId:guid}")]
         public async Task<IActionResult> FavoritarMusica(
             Guid usuarioId,

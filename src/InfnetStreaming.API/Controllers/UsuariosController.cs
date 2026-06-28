@@ -1,5 +1,7 @@
 using InfnetStreaming.Application.Services.Usuario.CriarUsuario;
 using InfnetStreaming.Application.Services.Usuario.LogarUsuario;
+using InfnetStreaming.Application.Services.Usuario.ObterUsuario;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InfnetStreaming.API.Controllers
@@ -25,6 +27,17 @@ namespace InfnetStreaming.API.Controllers
             CancellationToken cancellationToken)
         {
             var output = await service.Executar(input, cancellationToken);
+            return Ok(output);
+        }
+
+        [HttpGet("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> Obter(
+            Guid id,
+            [FromServices] ObterUsuarioService service,
+            CancellationToken cancellationToken)
+        {
+            var output = await service.Executar(id, cancellationToken);
             return Ok(output);
         }
     }

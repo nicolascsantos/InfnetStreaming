@@ -1,0 +1,22 @@
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 24px;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo { font-size: 20px; font-weight: 700; color: var(--accent); text-align: center; margin-bottom: 24px; }
+h1 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+.full-width { width: 100%; }
+.link-criar { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }

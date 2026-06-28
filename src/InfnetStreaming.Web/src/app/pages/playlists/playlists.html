@@ -1,0 +1,94 @@
+<app-navbar />
+
+<div class="page">
+  <div class="page-header">
+    <h1>Minhas Playlists</h1>
+    <div class="criar-form">
+      <input type="text" placeholder="Nome da nova playlist"
+             [value]="novaPlaylistNome()"
+             (input)="novaPlaylistNome.set($any($event.target).value)"
+             (keyup.enter)="criarPlaylist()" />
+      <button class="btn-primary" [disabled]="criando() || !novaPlaylistNome().trim()" (click)="criarPlaylist()">
+        {{ criando() ? '...' : '+ Criar' }}
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">Carregando...</div>
+  } @else if (!playlists().length) {
+    <p class="empty">Nenhuma playlist criada ainda.</p>
+  } @else {
+    <div class="playlist-list">
+      @for (p of playlists(); track p.id) {
+        <div class="playlist-item" [class.aberta]="playlistAberta()?.id === p.id">
+          <div class="playlist-row" (click)="abrirPlaylist(p.id)">
+            <div class="playlist-icon">♫</div>
+            <div class="playlist-meta">
+              <span class="playlist-nome">{{ p.nome }}</span>
+            </div>
+            <div class="playlist-actions" (click)="$event.stopPropagation()">
+              <button class="btn-danger-sm" (click)="deletarPlaylist(p.id)">Deletar</button>
+            </div>
+            <span class="chevron">{{ playlistAberta()?.id === p.id ? '▲' : '▼' }}</span>
+          </div>
+
+          @if (playlistAberta()?.id === p.id) {
+            <div class="playlist-detalhe">
+              @if (playlistAberta()!.musicas.length) {
+                <table class="track-list">
+                  @for (m of playlistAberta()!.musicas; track m.id) {
+                    <tr>
+                      <td class="track-num">{{ m.ordem_musica }}</td>
+                      <td class="track-nome">{{ m.nome }}</td>
+                      <td class="track-dur">{{ formatarDuracao(m.duracao) }}</td>
+                      <td class="track-action">
+                        <button class="btn-remove"
+                                [disabled]="removendo() === m.id"
+                                (click)="removerMusica(m.id)">✕</button>
+                      </td>
+                    </tr>
+                  }
+                </table>
+              } @else {
+                <p class="empty-playlist">Playlist vazia. Adicione músicas abaixo.</p>
+              }
+
+              <div class="add-musica">
+                <h4>Adicionar músicas</h4>
+                <div class="busca-row">
+                  <input type="text" placeholder="Buscar músicas..."
+                         [value]="buscaMusica()"
+                         (input)="buscaMusica.set($any($event.target).value)"
+                         (keyup.enter)="buscarMusicas()" />
+                  <button class="btn-secondary" [disabled]="buscando()" (click)="buscarMusicas()">
+                    {{ buscando() ? '...' : 'Buscar' }}
+                  </button>
+                </div>
+                @if (resultadoBusca().length) {
+                  <div class="busca-resultado">
+                    @for (m of resultadoBusca(); track m.id) {
+                      <div class="resultado-item">
+                        <span>{{ m.nome }}</span>
+                        <span class="dur">{{ formatarDuracao(m.duracao) }}</span>
+                        @if (jaNaPlaylist(m.id)) {
+                          <span class="ja-adicionada">✓ Adicionada</span>
+                        } @else {
+                          <button class="btn-add"
+                                  [disabled]="adicionando() === m.id"
+                                  (click)="adicionarMusica(m.id)">
+                            {{ adicionando() === m.id ? '...' : '+ Adicionar' }}
+                          </button>
+                        }
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

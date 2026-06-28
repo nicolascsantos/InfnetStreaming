@@ -1,0 +1,46 @@
+<app-navbar />
+
+<main class="page">
+  <h1>Assinatura</h1>
+
+  @if (usuario()) {
+    <div class="plano-atual">
+      <span>Plano atual:</span>
+      <strong>{{ usuario()!.nome_plano }}</strong>
+      <span class="badge badge-accent">R$ {{ usuario()!.valor_plano | number:'1.2-2' }}/mês</span>
+    </div>
+  }
+
+  @if (resultado()) {
+    <div class="alert" [class.alert-success]="resultado()!.status === 1" [class.alert-error]="resultado()!.status !== 1">
+      {{ resultado()!.mensagem_exibicao }}
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <div class="planos-grid">
+      @for (p of planos(); track p.id) {
+        <div class="plano-card" [class.atual]="isAtual(p.id)">
+          @if (isAtual(p.id)) {
+            <div class="atual-badge">Plano Atual</div>
+          }
+          <div class="plano-nome">{{ p.nome }}</div>
+          <div class="plano-valor">
+            <span class="valor-moeda">R$</span>
+            <span class="valor-num">{{ p.valor | number:'1.2-2' }}</span>
+            <span class="valor-periodo">/mês</span>
+          </div>
+          <button
+            class="btn-primary full-width"
+            [disabled]="isAtual(p.id) || assinandoId() === p.id"
+            (click)="assinar(p.id)"
+          >
+            {{ assinandoId() === p.id ? 'Processando...' : isAtual(p.id) ? 'Plano Ativo' : 'Assinar' }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</main>

@@ -1,0 +1,46 @@
+<app-navbar />
+
+<main class="page">
+  <h1>Autorizar Transação</h1>
+  <p class="subtitle">Simule a autorização de um pagamento de assinatura.</p>
+
+  <div class="card-form">
+    @if (erro()) {
+      <div class="alert alert-error">{{ erro() }}</div>
+    }
+
+    <div class="form-group">
+      <label>Plano</label>
+      <select [ngModel]="planoSelecionadoId()" (ngModelChange)="planoSelecionadoId.set($event)">
+        @for (p of planos(); track p.id) {
+          <option [value]="p.id">{{ p.nome }} — R$ {{ p.valor | number:'1.2-2' }}/mês</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Valor da transação</label>
+      <input type="number" [value]="valorSelecionado()" readonly />
+      <span class="hint">Calculado automaticamente com base no plano.</span>
+    </div>
+
+    <button class="btn-primary full-width" (click)="autorizar()" [disabled]="loading() || !planoSelecionadoId()">
+      {{ loading() ? 'Processando...' : 'Autorizar' }}
+    </button>
+  </div>
+
+  @if (resultado()) {
+    <div class="resultado" [class.aprovada]="isAprovada" [class.recusada]="!isAprovada">
+      <div class="resultado-status">
+        {{ isAprovada ? '✓' : '✗' }} {{ statusLabel }}
+      </div>
+      <div class="resultado-msg">{{ resultado()!.mensagem_exibicao }}</div>
+      <div class="resultado-detalhe">
+        Valor: <strong>R$ {{ resultado()!.valor | number:'1.2-2' }}</strong>
+        &nbsp;|&nbsp;
+        Data: <strong>{{ resultado()!.data_transacao | date:'dd/MM/yyyy HH:mm' }}</strong>
+      </div>
+      <div class="resultado-id">ID: {{ resultado()!.transacao_id }}</div>
+    </div>
+  }
+</main>

@@ -6,5 +6,6 @@ namespace InfnetStreaming.Domain.Repositorios
 {
     public interface IRepositorioMusica : IRepositorioGenerico<Musica>, IRepositoryProcura<Musica>
     {
+        Task<IReadOnlyList<Musica>> ListarPorIds(IEnumerable<Guid> ids, CancellationToken cancellationToken);
     }
 }

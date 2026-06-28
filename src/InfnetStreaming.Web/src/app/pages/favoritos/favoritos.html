@@ -1,0 +1,48 @@
+<app-navbar />
+
+<main class="page">
+  <h1>Favoritos</h1>
+
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <section class="section">
+      <h2>🎵 Músicas Favoritas</h2>
+      @if (favoritos().musicas_favoritas.length === 0) {
+        <div class="empty-state">Nenhuma música favoritada ainda.</div>
+      } @else {
+        <div class="list">
+          @for (m of favoritos().musicas_favoritas; track m.musica_id) {
+            <div class="item">
+              <div class="item-icon">🎵</div>
+              <div class="item-info">
+                <div class="item-nome">{{ m.nome }}</div>
+                <div class="item-meta">{{ formatarDuracao(m.duracao) }}</div>
+              </div>
+              <button class="btn-danger btn-sm" (click)="desfavoritarMusica(m.musica_id)">Remover</button>
+            </div>
+          }
+        </div>
+      }
+    </section>
+
+    <section class="section">
+      <h2>🎸 Bandas Favoritas</h2>
+      @if (favoritos().bandas_favoritas.length === 0) {
+        <div class="empty-state">Nenhuma banda favoritada ainda.</div>
+      } @else {
+        <div class="list">
+          @for (b of favoritos().bandas_favoritas; track b.banda_id) {
+            <div class="item">
+              <div class="item-icon">🎸</div>
+              <div class="item-info">
+                <div class="item-nome">{{ b.nome }}</div>
+              </div>
+              <button class="btn-danger btn-sm" (click)="desfavoritarBanda(b.banda_id)">Remover</button>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  }
+</main>

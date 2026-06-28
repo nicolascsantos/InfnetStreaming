@@ -15,16 +15,13 @@ namespace InfnetStreaming.Application.Services.Usuario.FavoritarBanda
 
         public async Task Executar(FavoritarBandaInput input, CancellationToken cancellationToken)
         {
-            var usuario = await _repositorioUsuario.GetComFavoritos(input.UsuarioId, cancellationToken);
-
+            await _repositorioUsuario.Get(input.UsuarioId, cancellationToken);
             await _repositorioBanda.Get(input.BandaId, cancellationToken);
 
             if (input.Favoritar)
-                usuario.FavoritarBanda(input.BandaId);
+                await _repositorioUsuario.AdicionarBandaFavorita(input.UsuarioId, input.BandaId, cancellationToken);
             else
-                usuario.DesfavoritarBanda(input.BandaId);
-
-            await _repositorioUsuario.Atualizar(usuario, cancellationToken);
+                await _repositorioUsuario.RemoverBandaFavorita(input.UsuarioId, input.BandaId, cancellationToken);
         }
     }
 }

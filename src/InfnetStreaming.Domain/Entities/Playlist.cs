@@ -20,6 +20,12 @@ namespace InfnetStreaming.Domain.Entities
 
         public void AdicionarMusica(Musica musica) => _musicas.Add(musica);
 
+        public void RemoverMusica(Guid musicaId)
+        {
+            var musica = _musicas.FirstOrDefault(m => m.Id == musicaId);
+            if (musica is not null) _musicas.Remove(musica);
+        }
+
         protected Playlist() { Nome = null!; }
     }
 }

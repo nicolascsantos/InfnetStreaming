@@ -1,4 +1,5 @@
 using InfnetStreaming.Domain.Entities;
+using InfnetStreaming.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace InfnetStreaming.Data.Seeder
@@ -48,10 +49,23 @@ namespace InfnetStreaming.Data.Seeder
 
         private static void SeedUsuarios(DbContext context)
         {
-            if (context.Set<Usuario>().Any()) return;
-
             var planoId = context.Set<Plano>().First().Id;
-            context.Set<Usuario>().Add(new Usuario("Admin", "admin", "Admin123!", planoId));
+
+            if (context.Set<Usuario>().Any())
+            {
+                var admin = context.Set<Usuario>().FirstOrDefault(u => u.Username == "admin");
+                if (admin is not null && !admin.Senha.Contains(':'))
+                {
+                    var novaHash = SenhaHelper.Hash("Admin123!");
+                    context.Database.ExecuteSqlInterpolated(
+                        $"UPDATE Usuario SET Senha = {novaHash} WHERE Username = 'admin'");
+                    context.SaveChanges();
+                }
+                return;
+            }
+
+            context.Set<Usuario>().Add(
+                new Usuario("Admin", "admin", SenhaHelper.Hash("Admin123!"), planoId));
             context.SaveChanges();
         }
 

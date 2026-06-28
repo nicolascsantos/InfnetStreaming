@@ -35,7 +35,8 @@ namespace InfnetStreaming.Data.Repositorios
 
         public async Task<Banda> Atualizar(Banda agregado, CancellationToken cancellationToken)
         {
-            _context.Update(agregado);
+            if (_context.Entry(agregado).State == Microsoft.EntityFrameworkCore.EntityState.Detached)
+                _context.Update(agregado);
             await _context.SaveChangesAsync(cancellationToken);
             return agregado;
         }
@@ -64,6 +65,24 @@ namespace InfnetStreaming.Data.Repositorios
                 .ToListAsync(cancellationToken);
 
             return new RespostaBusca<Banda>(input.Page, input.PerPage, total, itens);
+        }
+
+        public async Task<IReadOnlyList<Banda>> ListarPorIds(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+            => await _context.Set<Banda>().AsNoTracking()
+                .Where(b => ids.Contains(b.Id))
+                .ToListAsync(cancellationToken);
+
+        public async Task<Banda> GetComDetalhes(Guid id, CancellationToken cancellationToken)
+        {
+            var banda = await _context.Set<Banda>()
+                .Include(b => b.Albuns).ThenInclude(a => a.Musicas)
+                .Include(b => b.Integrantes)
+                .Include(b => b.Generos)
+                .Include(b => b.Singles)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(b => b.Id == id, cancellationToken)
+                ?? throw new NotFoundException($"Banda '{id}' não encontrada.");
+            return banda;
         }
     }
 }

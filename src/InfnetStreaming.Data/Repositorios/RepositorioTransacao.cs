@@ -35,7 +35,8 @@ namespace InfnetStreaming.Data.Repositorios
 
         public async Task<Transacao> Atualizar(Transacao agregado, CancellationToken cancellationToken)
         {
-            _context.Update(agregado);
+            if (_context.Entry(agregado).State == Microsoft.EntityFrameworkCore.EntityState.Detached)
+                _context.Update(agregado);
             await _context.SaveChangesAsync(cancellationToken);
             return agregado;
         }

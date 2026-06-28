@@ -35,7 +35,8 @@ namespace InfnetStreaming.Data.Repositorios
 
         public async Task<Musica> Atualizar(Musica agregado, CancellationToken cancellationToken)
         {
-            _context.Update(agregado);
+            if (_context.Entry(agregado).State == Microsoft.EntityFrameworkCore.EntityState.Detached)
+                _context.Update(agregado);
             await _context.SaveChangesAsync(cancellationToken);
             return agregado;
         }
@@ -68,5 +69,10 @@ namespace InfnetStreaming.Data.Repositorios
 
             return new RespostaBusca<Musica>(input.Page, input.PerPage, total, itens);
         }
+
+        public async Task<IReadOnlyList<Musica>> ListarPorIds(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+            => await _context.Set<Musica>().AsNoTracking()
+                .Where(m => ids.Contains(m.Id))
+                .ToListAsync(cancellationToken);
     }
 }

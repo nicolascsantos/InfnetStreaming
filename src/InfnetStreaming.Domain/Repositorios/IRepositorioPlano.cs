@@ -5,5 +5,6 @@ namespace InfnetStreaming.Domain.Repositorios
 {
     public interface IRepositorioPlano : IRepositorioGenerico<Plano>
     {
+        Task<IReadOnlyList<Plano>> ListarTodos(CancellationToken cancellationToken);
     }
 }
