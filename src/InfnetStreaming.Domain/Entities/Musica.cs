@@ -2,7 +2,7 @@ using InfnetStreaming.Domain.SeedWork;
 
 namespace InfnetStreaming.Domain.Entities
 {
-    public class Musica : Entidade
+    public class Musica : RaizDeAgregacao
     {
         public string Nome { get; private set; }
 

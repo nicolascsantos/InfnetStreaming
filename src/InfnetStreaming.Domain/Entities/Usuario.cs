@@ -6,6 +6,7 @@ namespace InfnetStreaming.Domain.Entities
     {
         private readonly List<Playlist> _playlists = new();
         private readonly List<MusicaFavorita> _musicasFavoritas = new();
+        private readonly List<BandaFavorita> _bandasFavoritas = new();
 
         public string Nome { get; private set; }
 
@@ -18,6 +19,8 @@ namespace InfnetStreaming.Domain.Entities
         public IReadOnlyCollection<Playlist> Playlists => _playlists;
 
         public IReadOnlyCollection<MusicaFavorita> MusicasFavoritas => _musicasFavoritas;
+
+        public IReadOnlyCollection<BandaFavorita> BandasFavoritas => _bandasFavoritas;
 
         public DateTime DataCriada { get; private set; }
 
@@ -44,6 +47,18 @@ namespace InfnetStreaming.Domain.Entities
         {
             var favorita = _musicasFavoritas.FirstOrDefault(f => f.MusicaId == musicaId);
             if (favorita is not null) _musicasFavoritas.Remove(favorita);
+        }
+
+        public void FavoritarBanda(Guid bandaId)
+        {
+            if (_bandasFavoritas.Any(b => b.BandaId == bandaId)) return;
+            _bandasFavoritas.Add(new BandaFavorita(bandaId));
+        }
+
+        public void DesfavoritarBanda(Guid bandaId)
+        {
+            var favorita = _bandasFavoritas.FirstOrDefault(b => b.BandaId == bandaId);
+            if (favorita is not null) _bandasFavoritas.Remove(favorita);
         }
 
         protected Usuario() { Nome = null!; Username = null!; Senha = null!; }
