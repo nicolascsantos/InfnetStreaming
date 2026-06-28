@@ -18,7 +18,7 @@ namespace InfnetStreaming.API.Configurations
                 options
                     .UseSqlServer(configuration.GetConnectionString("InfnetStreamingConnString"))
                     .UseSeeding((context, _) => InfnetStreamingSeeder.Seed(context))
-                
+
             );
             return services;
         }

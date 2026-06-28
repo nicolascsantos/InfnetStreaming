@@ -1,5 +1,4 @@
-﻿using InfnetStreaming.Application.Excecoes;
-using InfnetStreaming.Domain.Excecoes;
+﻿using InfnetStreaming.Domain.Excecoes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
