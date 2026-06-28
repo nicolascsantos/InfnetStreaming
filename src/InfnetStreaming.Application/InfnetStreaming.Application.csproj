@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Services\Usuario\LogarUsuario\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfnetStreaming.Data\InfnetStreaming.Data.csproj" />
+    <ProjectReference Include="..\InfnetStreaming.Domain\InfnetStreaming.Domain.csproj" />
   </ItemGroup>
 
 </Project>

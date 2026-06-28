@@ -1,4 +1,5 @@
 ﻿using InfnetStreaming.Data;
+using InfnetStreaming.Data.Seeder;
 using Microsoft.EntityFrameworkCore;
 
 namespace InfnetStreaming.API.Configurations
@@ -14,7 +15,10 @@ namespace InfnetStreaming.API.Configurations
         public static IServiceCollection AddDbConnection(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<InfnetStreamingDbContext>(options =>
-                options.UseInMemoryDatabase("DbInfnetStreaming")
+                options
+                    .UseSqlServer(configuration.GetConnectionString("InfnetStreamingConnString"))
+                    .UseSeeding((context, _) => InfnetStreamingSeeder.Seed(context))
+                
             );
             return services;
         }
