@@ -10,4 +10,13 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfnetStreaming.Application\InfnetStreaming.Application.csproj" />
+    <ProjectReference Include="..\InfnetStreaming.Data\InfnetStreaming.Data.csproj" />
+  </ItemGroup>
+
 </Project>
