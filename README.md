@@ -67,7 +67,9 @@ dotnet build InfnetStreaming.slnx
 dotnet run --project src/InfnetStreaming.API/InfnetStreaming.API.csproj
 ```
 
-> As migrations são aplicadas automaticamente na inicialização. O banco de dados é criado caso não exista.
+## ⚠️⚠️ As migrations são aplicadas automaticamente na inicialização. O banco de dados é criado caso não exista. ⚠️⚠️
+
+
 
 A API estará disponível em: `http://localhost:5103`
 
